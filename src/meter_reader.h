@@ -1,9 +1,9 @@
-#ifndef METER_READER_H
-
-#define METER_READER_H
+#ifndef _METER_READER_H
+#define _METER_READER_H
 
 #include "Arduino.h"
-const long PULSES_PER_KWH = 500L;
+
+const unsigned long PULSES_PER_KWH = 500L;
 const uint8_t INTERRUPT_PIN = D7;
 const unsigned long KWH = 3600000L; // Joule (3600 seconds per hour, 1000 watts per kW)
 const int JOULES_PER_PULSE = KWH / PULSES_PER_KWH;

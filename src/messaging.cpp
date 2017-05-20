@@ -1,8 +1,10 @@
 #include "messaging.h"
 #include "network.h"
 
-WiFiClient espClient;
-PubSubClient client(espClient);
+WiFiClient networkClient;
+void callback(char* topic, byte* payload, unsigned int length);
+
+PubSubClient client(mqtt_server, 1883, callback, networkClient );
 
 void mqtt_reconnect() {
 	while (!client.connected()) {
@@ -22,9 +24,10 @@ void mqtt_reconnect() {
 	}
 }
 
-PubSubClient get_client() {
-	return client;
+void callback(char* topic, byte* payload, unsigned int length) {
+  // handle message arrived
 }
-void messaging_setup( const char * mqtt_server ) {
-  client.setServer(mqtt_server, 1883);
+
+void publish( const char * key, char * message ) {
+	client.publish( key, message );
 }
